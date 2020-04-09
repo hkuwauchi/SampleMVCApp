@@ -153,16 +153,17 @@ namespace SampleMVCApp.Controllers
         // GET: People/Find
         public async Task<IActionResult> Find()
         {
-            return View(await _context.Person.ToListAsync());
+            IQueryable<Person> result = from p in _context.Person select p;
+            return View(await result.ToListAsync());
         }
 
         // Post: People/Find/Hanako
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Find(string find)
+        public async Task<IActionResult> Find(string Find)
         {
-            var People = await _context.Person.Where(m => m.Name == find).ToListAsync();
-            return View(People);
+            IQueryable<Person> result = from p in _context.Person where p.Name == Find select p;
+            return View(await result.ToListAsync());
         }
     }
 }
