@@ -20,6 +20,9 @@ namespace SampleMVCApp.Models
         //[Range(0, 200, ErrorMessage = "ゼロ以上200以下の値にしてください。")]
         public int Age { get; set; }
 
+        [Display(Name = "投稿")]
+        public ICollection<Message> Message { get; set; }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (Name == null)
